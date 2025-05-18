@@ -6,4 +6,5 @@ import org.springframework.data.mongodb.repository.MongoRepository
 
 interface MongoNoteRepository : MongoRepository<NoteDocument, ObjectId> {
     fun findByOwnerId(ownerId: String): List<NoteDocument>
+    fun findByTitle(title: String): NoteDocument?
 }

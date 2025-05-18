@@ -33,4 +33,8 @@ class NotesRepositoryImpl(
     override fun deleteById(id: String) {
         TODO("Not yet implemented")
     }
+
+    override fun findByTitle(title: String): Note? {
+        return mongoNoteRepository.findByTitle(title)?.toDomain()
+    }
 }

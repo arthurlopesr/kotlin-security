@@ -3,6 +3,7 @@ package ktapi.kotlinsecurity.infra.persistence.document
 import ktapi.kotlinsecurity.domain.model.Note
 import org.bson.types.ObjectId
 import org.springframework.data.annotation.Id
+import org.springframework.data.mongodb.core.index.Indexed
 import org.springframework.data.mongodb.core.mapping.Document
 import java.time.Instant
 
@@ -10,6 +11,7 @@ import java.time.Instant
 data class NoteDocument(
     @Id
     val id: ObjectId = ObjectId.get(),
+    @Indexed(unique = true)
     val title: String,
     val content: String,
     val color: String,
