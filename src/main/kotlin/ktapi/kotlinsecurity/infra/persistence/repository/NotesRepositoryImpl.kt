@@ -1,5 +1,6 @@
 package ktapi.kotlinsecurity.infra.persistence.repository
 
+import ktapi.kotlinsecurity.domain.exception.NotFoundException
 import ktapi.kotlinsecurity.domain.model.Note
 import ktapi.kotlinsecurity.domain.repository.NotesRepository
 import ktapi.kotlinsecurity.infra.persistence.document.NoteDocument
@@ -38,7 +39,7 @@ class NotesRepositoryImpl(
     override fun deleteById(id: String) {
         val noteId = ObjectId(id)
         if (!mongoNoteRepository.existsById(noteId)) {
-            throw IllegalArgumentException("Note with id $id does not exist")
+            throw NotFoundException("Note with id $id does not exist")
         }
         mongoNoteRepository.deleteById(noteId)
     }
