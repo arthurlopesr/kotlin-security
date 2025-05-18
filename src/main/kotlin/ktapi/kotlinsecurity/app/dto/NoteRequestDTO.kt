@@ -9,7 +9,7 @@ data class NoteRequestDTO(
     val title: String,
     val content: String,
     val color: String,
-    val ownerId: UUID
+    val ownerId: String
 ) {
     fun toDomain(): Note {
         return Note(

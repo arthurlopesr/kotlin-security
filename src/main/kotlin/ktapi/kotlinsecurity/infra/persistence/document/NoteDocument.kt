@@ -5,7 +5,6 @@ import org.bson.types.ObjectId
 import org.springframework.data.annotation.Id
 import org.springframework.data.mongodb.core.mapping.Document
 import java.time.Instant
-import java.util.UUID
 
 @Document(collection = "notes")
 data class NoteDocument(
@@ -15,7 +14,7 @@ data class NoteDocument(
     val content: String,
     val color: String,
     val createdAt: Instant,
-    val ownerId: UUID? = null
+    val ownerId: String
 ) {
     fun toDomain() = Note(
         id = id.toHexString(),
@@ -25,6 +24,7 @@ data class NoteDocument(
         createdAt = createdAt,
         ownerId = ownerId
     )
+
     companion object {
         fun fromDomain(note: Note) = NoteDocument(
             id = note.id?.let { ObjectId(it) } ?: ObjectId.get(),
