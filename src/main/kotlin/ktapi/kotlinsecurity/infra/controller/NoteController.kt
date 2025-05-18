@@ -30,4 +30,16 @@ class NoteController(
         val response = notes.map { NoteResponseDTO.fromDomain(it) }
         return ResponseEntity.ok(response)
     }
+
+    @GetMapping("/{noteId}")
+    fun getNoteById(@PathVariable noteId: String): ResponseEntity<NoteResponseDTO> {
+        val note = noteService.findById(noteId) ?: return ResponseEntity.status(HttpStatus.NO_CONTENT).build()
+        return ResponseEntity.ok(NoteResponseDTO.fromDomain(note))
+    }
+
+    @DeleteMapping("/{noteId}")
+    fun deleteNoteById(@PathVariable noteId: String): ResponseEntity<Void> {
+        noteService.deleteById(noteId)
+        return ResponseEntity.noContent().build()
+    }
 }
